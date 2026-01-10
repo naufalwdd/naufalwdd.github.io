@@ -101,7 +101,17 @@ export default function Navbar() {
                                 <a
                                     key={link.name}
                                     href={link.href}
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setIsOpen(false);
+                                        // Small delay to let menu close before scrolling
+                                        setTimeout(() => {
+                                            const element = document.querySelector(link.href);
+                                            if (element) {
+                                                element.scrollIntoView({ behavior: 'smooth' });
+                                            }
+                                        }, 100);
+                                    }}
                                     className={`px-4 py-3 rounded-lg font-semibold transition-colors ${activeSection === link.href.substring(1)
                                         ? 'bg-accent/10 text-accent'
                                         : 'text-slate-600 hover:bg-slate-50 hover:text-accent'
