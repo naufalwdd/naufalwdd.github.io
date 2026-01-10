@@ -47,12 +47,12 @@ export const cvData = {
     frameworks: [
       "Flask",
       "Django",
+      "NestJS",
       ".NET",
       "Alpine.js",
       "React.js",
       "Next.js",
-      "Tailwind CSS",
-      "NestJS"
+      "Tailwind CSS"
     ],
     mobile: ["React Native", "Xamarin"],
     databases: ["PostgreSQL", "SQL Server", "SQLite", "FirebirdSQL"],
