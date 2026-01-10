@@ -10,6 +10,7 @@ export default function Navbar() {
         { name: 'About', href: '#about' },
         { name: 'Experience', href: '#experience' },
         { name: 'Skills', href: '#skills' },
+        { name: 'Projects', href: '#projects' },
         { name: 'Contact', href: '#contact' },
     ];
 
@@ -61,8 +62,8 @@ export default function Navbar() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 + (0.1 * i) }}
                             className={`relative px-4 py-2 text-sm font-semibold rounded-lg transition-colors ${activeSection === link.href.substring(1)
-                                    ? 'text-accent'
-                                    : 'text-slate-600 hover:text-accent'
+                                ? 'text-accent'
+                                : 'text-slate-600 hover:text-accent'
                                 }`}
                         >
                             {link.name}
@@ -102,8 +103,8 @@ export default function Navbar() {
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
                                     className={`px-4 py-3 rounded-lg font-semibold transition-colors ${activeSection === link.href.substring(1)
-                                            ? 'bg-accent/10 text-accent'
-                                            : 'text-slate-600 hover:bg-slate-50 hover:text-accent'
+                                        ? 'bg-accent/10 text-accent'
+                                        : 'text-slate-600 hover:bg-slate-50 hover:text-accent'
                                         }`}
                                 >
                                     {link.name}
