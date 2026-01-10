@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-bg text-slate-900 font-sans antialiased overflow-x-hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply tracking-tighter;
+    }
+}
+
+@layer utilities {
+    .section {
+        @apply py-16 px-6;
+    }
+
+    .glass {
+        @apply bg-white/80 backdrop-blur-xl border border-slate-200/60;
+        box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+    }
+
+    .section-title {
+        @apply text-4xl md:text-5xl font-bold mb-12 text-center text-slate-900 tracking-tighter;
+    }
+
+    .gradient-text {
+        @apply text-transparent bg-clip-text bg-gradient-to-r from-accent-dark via-accent to-accent-light;
+    }
+
+    .card-hover {
+        @apply transition-all duration-300 hover:-translate-y-1;
+        box-shadow: 0 10px 40px -5px rgba(0, 0, 0, 0.1), 0 20px 50px -10px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-primary {
+        @apply px-8 py-4 bg-gradient-to-r from-accent-dark to-accent text-white font-semibold rounded-full transition-all duration-300 hover:scale-105;
+        box-shadow: 0 0 30px rgba(13, 148, 136, 0.25);
+    }
+
+    .btn-secondary {
+        @apply px-8 py-4 bg-white text-slate-900 border-2 border-slate-200 font-semibold rounded-full hover:border-accent hover:text-accent transition-all duration-300 hover:scale-105;
+    }
+}
