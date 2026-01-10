@@ -48,6 +48,7 @@ export const cvData = {
       "Flask",
       "Django",
       ".NET",
+      "Alpine.js",
       "React.js",
       "Next.js",
       "Tailwind CSS",
