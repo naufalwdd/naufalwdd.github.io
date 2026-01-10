@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Code2, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Import images
 import PWAImage from '../assets/PWA.png';
 import POSImage from '../assets/POS.jpg';
+import POS2Image from '../assets/POS2.jpg';
 import PLIImage from '../assets/PLI.png';
 import IACImage from '../assets/IAC.png';
+import IAC2Image from '../assets/IAC2.png';
 
 const projects = [
     {
@@ -24,7 +26,7 @@ const projects = [
         tech: ["React Native", "Flask", "PostgreSQL", "SQLite", "Tailwind CSS"],
         gradient: "from-emerald-500/10 via-teal-500/10 to-green-500/10",
         span: "md:col-span-1",
-        image: POSImage
+        images: [POSImage, POS2Image]
     },
     {
         title: "Cognex Hardware Integration System",
@@ -37,16 +39,36 @@ const projects = [
     {
         title: "Indonesian Al Quran Center Website",
         description: "A full-stack website developed for Indonesian Al Quran Center. Features dynamic content management, event registration system with integrated payment gateway, online ticketing platform, and comprehensive admin functionality for managing community information and educational resources.",
-        tech: ["React.js", "Flask", "PostgreSQL", "Tailwind CSS"],
+        tech: ["Alpine.js", "Flask", "PostgreSQL", "Tailwind CSS"],
         gradient: "from-orange-500/10 via-amber-500/10 to-yellow-500/10",
         span: "md:col-span-2",
         link: "https://indonesianalqurancenter.or.id",
-        image: IACImage
+        images: [IAC2Image, IACImage]
     }
 ];
 
 export default function Projects() {
     const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
+    const [carouselIndices, setCarouselIndices] = useState<Record<number, number>>({});
+
+    // Auto-rotate carousel images
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCarouselIndices(prev => {
+                const newIndices = { ...prev };
+                projects.forEach((project, index) => {
+                    if ((project as any).images) {
+                        const currentIndex = prev[index] || 0;
+                        const imagesLength = (project as any).images.length;
+                        newIndices[index] = (currentIndex + 1) % imagesLength;
+                    }
+                });
+                return newIndices;
+            });
+        }, 3000); // Change image every 3 seconds
+
+        return () => clearInterval(interval);
+    }, []);
 
     const container = {
         hidden: { opacity: 0 },
@@ -95,27 +117,107 @@ export default function Projects() {
                             {/* Gradient Background */}
                             <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
-                            {/* Project Image */}
-                            {project.image && (
-                                <div
-                                    onClick={() => setSelectedImage({ src: project.image!, title: project.title })}
-                                    className="relative h-56 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center rounded-t-2xl cursor-pointer group/image"
-                                >
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        className="w-full h-full object-contain p-4 group-hover/image:scale-110 transition-transform duration-500"
-                                    />
-                                    <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/5 transition-colors duration-300 flex items-center justify-center">
-                                        <span className="text-white bg-accent/90 px-4 py-2 rounded-full text-sm font-semibold opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
-                                            Click to preview
-                                        </span>
-                                    </div>
+                            {/* Project Image or Carousel */}
+                            {((project as any).images || (project as any).image) && (
+                                <div className="relative h-56 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center rounded-t-2xl">
+                                    {(project as any).images ? (
+                                        // Carousel for multiple images
+                                        <>
+                                            <div
+                                                onClick={() => {
+                                                    const currentIndex = carouselIndices[index] || 0;
+                                                    setSelectedImage({
+                                                        src: (project as any).images[currentIndex],
+                                                        title: project.title
+                                                    });
+                                                }}
+                                                className="w-full h-full cursor-pointer group/image"
+                                            >
+                                                <img
+                                                    src={(project as any).images[carouselIndices[index] || 0]}
+                                                    alt={`${project.title} - Image ${(carouselIndices[index] || 0) + 1}`}
+                                                    className="w-full h-full object-contain p-4 group-hover/image:scale-110 transition-transform duration-500"
+                                                />
+                                                <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/5 transition-colors duration-300 flex items-center justify-center">
+                                                    <span className="text-white bg-accent/90 px-4 py-2 rounded-full text-sm font-semibold opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
+                                                        Click to preview
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            {/* Carousel Navigation */}
+                                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                                                {(project as any).images.map((_: any, imgIndex: number) => (
+                                                    <button
+                                                        key={imgIndex}
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setCarouselIndices(prev => ({ ...prev, [index]: imgIndex }));
+                                                        }}
+                                                        className={`w-2 h-2 rounded-full transition-all duration-300 ${(carouselIndices[index] || 0) === imgIndex
+                                                            ? 'bg-accent w-8'
+                                                            : 'bg-slate-300 hover:bg-slate-400'
+                                                            }`}
+                                                        aria-label={`View image ${imgIndex + 1}`}
+                                                    />
+                                                ))}
+                                            </div>
+
+                                            {/* Previous/Next Buttons */}
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    const currentIndex = carouselIndices[index] || 0;
+                                                    const newIndex = currentIndex === 0
+                                                        ? (project as any).images.length - 1
+                                                        : currentIndex - 1;
+                                                    setCarouselIndices(prev => ({ ...prev, [index]: newIndex }));
+                                                }}
+                                                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                                                aria-label="Previous image"
+                                            >
+                                                <svg className="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                                </svg>
+                                            </button>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    const currentIndex = carouselIndices[index] || 0;
+                                                    const newIndex = (currentIndex + 1) % (project as any).images.length;
+                                                    setCarouselIndices(prev => ({ ...prev, [index]: newIndex }));
+                                                }}
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                                                aria-label="Next image"
+                                            >
+                                                <svg className="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </button>
+                                        </>
+                                    ) : (
+                                        // Single image (existing behavior)
+                                        <div
+                                            onClick={() => setSelectedImage({ src: (project as any).image!, title: project.title })}
+                                            className="w-full h-full cursor-pointer group/image"
+                                        >
+                                            <img
+                                                src={(project as any).image}
+                                                alt={project.title}
+                                                className="w-full h-full object-contain p-4 group-hover/image:scale-110 transition-transform duration-500"
+                                            />
+                                            <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/5 transition-colors duration-300 flex items-center justify-center">
+                                                <span className="text-white bg-accent/90 px-4 py-2 rounded-full text-sm font-semibold opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
+                                                    Click to preview
+                                                </span>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             )}
 
                             {/* Content */}
-                            <div className="relative z-10 p-8 flex flex-col h-full">
+                            <div className="relative z-10 p-8 flex flex-col">
                                 {/* Header */}
                                 <div className="flex items-start justify-between mb-6">
                                     <div className="p-3 bg-gradient-to-br from-accent/10 to-accent-light/10 rounded-xl group-hover:scale-110 transition-transform duration-300">
@@ -138,17 +240,17 @@ export default function Projects() {
                                 </div>
 
                                 {/* Title & Description */}
-                                <div className="flex-1">
+                                <div className="mb-6">
                                     <h3 className="text-2xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-accent transition-colors">
                                         {project.title}
                                     </h3>
-                                    <p className="text-slate-600 leading-relaxed text-sm mb-6">
+                                    <p className="text-slate-600 leading-relaxed text-sm">
                                         {project.description}
                                     </p>
                                 </div>
 
                                 {/* Tech Stack */}
-                                <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
+                                <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100 mt-auto">
                                     {project.tech.map((t) => (
                                         <span
                                             key={t}
