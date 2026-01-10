@@ -27,7 +27,7 @@ const projects = [
         image: POSImage
     },
     {
-        title: "Cognex QR Scanner",
+        title: "Cognex Hardware Integration System",
         description: "A desktop-based QR code scanning application developed for PT. Pacific Lubritama Indonesia as a freelance project. Integrated with Cognex DM260, enabling fast data capture, validation, and automatic upload to a production database for manufacturing workflows.",
         tech: ["Flask", "flaskwebgui", "SQLite", "Tailwind CSS"],
         gradient: "from-violet-500/10 via-purple-500/10 to-fuchsia-500/10",
@@ -36,7 +36,7 @@ const projects = [
     },
     {
         title: "Indonesian Al Quran Center Website",
-        description: "A full-stack website for Indonesian Al Quran Center featuring dynamic content management, event registration system with integrated payment gateway, online ticketing platform, and comprehensive admin functionality for managing community information and educational resources.",
+        description: "A full-stack website developed for Indonesian Al Quran Center. Features dynamic content management, event registration system with integrated payment gateway, online ticketing platform, and comprehensive admin functionality for managing community information and educational resources.",
         tech: ["React.js", "Flask", "PostgreSQL", "Tailwind CSS"],
         gradient: "from-orange-500/10 via-amber-500/10 to-yellow-500/10",
         span: "md:col-span-2",

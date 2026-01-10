@@ -14,7 +14,7 @@ export const cvData = {
       role: "Freelance Developer",
       company: "Independent",
       period: "May 2023 - Present",
-      summary: "Building custom web applications and software solutions for various clients, including POS systems, QR scanning applications, and full-stack websites with integrated payment gateways."
+      summary: "Building custom web applications and software solutions for various clients, including POS systems, data interfacing applications, hardware integration systems, and full-stack websites with integrated payment gateways."
     },
     {
       role: "Software Developer",
