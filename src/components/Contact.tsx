@@ -18,7 +18,7 @@ export default function Contact() {
         },
         {
             icon: <Github size={24} />,
-            href: "https://github.com/naufalwdd",
+            href: "https://naufalwdd.github.io/",
             label: "GitHub",
             color: "from-gray-700 to-gray-600"
         }
