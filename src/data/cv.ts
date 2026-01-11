@@ -50,8 +50,8 @@ export const cvData = {
       "NestJS",
       ".NET",
       "Alpine.js",
-      "React.js",
       "Next.js",
+      "React",
       "Tailwind CSS"
     ],
     mobile: ["React Native", "Xamarin"],
