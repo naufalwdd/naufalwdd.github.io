@@ -9,8 +9,19 @@ import POS2Image from '../assets/POS2.jpg';
 import PLIImage from '../assets/PLI.png';
 import IACImage from '../assets/IAC.png';
 import IAC2Image from '../assets/IAC2.png';
+import KITAImage from '../assets/KITA.png';
+import KITA2Image from '../assets/KITA2.png';
 
 const projects = [
+    {
+        title: "Indonesian Al Quran Center Website",
+        description: "A full-stack website developed for Indonesian Al Quran Center. Features dynamic content management, event registration system with integrated payment gateway, online ticketing platform, and comprehensive admin functionality for managing community information and educational resources.",
+        tech: ["Alpine.js", "Flask", "PostgreSQL", "Tailwind CSS"],
+        gradient: "from-orange-500/10 via-amber-500/10 to-yellow-500/10",
+        span: "md:col-span-3",
+        link: "https://indonesianalqurancenter.or.id",
+        images: [IAC2Image, IACImage]
+    },
     {
         title: "PWA POS System",
         description: "A Progressive Web App-based Point of Sale system designed for UMKM (Micro, Small, and Medium Enterprises) with offline support, real-time transactions, and responsive UI. Features fast performance and seamless synchronization for reliable business operations.",
@@ -37,13 +48,13 @@ const projects = [
         image: PLIImage
     },
     {
-        title: "Indonesian Al Quran Center Website",
-        description: "A full-stack website developed for Indonesian Al Quran Center. Features dynamic content management, event registration system with integrated payment gateway, online ticketing platform, and comprehensive admin functionality for managing community information and educational resources.",
-        tech: ["Alpine.js", "Flask", "PostgreSQL", "Tailwind CSS"],
+        title: "Shell - KITA Dashboard",
+        description: "A comprehensive web dashboard developed for Shell Indonesia to monitor and analyze sales data, inventory stock levels, and distribution operations. Features real-time data visualization, analytics reporting, and centralized management tools for tracking business performance across multiple locations.",
+        tech: ["Angular", ".NET", "SQL Server", "Bootstrap"],
         gradient: "from-orange-500/10 via-amber-500/10 to-yellow-500/10",
         span: "md:col-span-2",
-        link: "https://indonesianalqurancenter.or.id",
-        images: [IAC2Image, IACImage]
+        link: "https://www.kita-dashboard.id",
+        images: [KITA2Image, KITAImage]
     }
 ];
 
@@ -105,21 +116,21 @@ export default function Projects() {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8"
                 >
                     {projects.map((project, index) => (
                         <motion.div
                             key={index}
                             variants={item}
                             whileHover={{ y: -8 }}
-                            className={`group relative overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-soft hover:shadow-large transition-all duration-500 ${project.span}`}
+                            className={`group relative overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-soft hover:shadow-large transition-all duration-500 flex flex-col ${project.span}`}
                         >
                             {/* Gradient Background */}
                             <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                             {/* Project Image or Carousel */}
                             {((project as any).images || (project as any).image) && (
-                                <div className="relative h-56 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center rounded-t-2xl">
+                                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center rounded-t-2xl flex-shrink-0">
                                     {(project as any).images ? (
                                         // Carousel for multiple images
                                         <>
@@ -217,7 +228,7 @@ export default function Projects() {
                             )}
 
                             {/* Content */}
-                            <div className="relative z-10 p-8 flex flex-col">
+                            <div className="relative z-10 p-8 flex flex-col flex-grow">
                                 {/* Header */}
                                 <div className="flex items-start justify-between mb-6">
                                     <div className="p-3 bg-gradient-to-br from-accent/10 to-accent-light/10 rounded-xl group-hover:scale-110 transition-transform duration-300">
