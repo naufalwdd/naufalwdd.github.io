@@ -11,12 +11,6 @@ export const cvData = {
   },
   experience: [
     {
-      role: "Product Engineer & Creator",
-      company: "Narva",
-      period: "Ongoing",
-      summary: "Building Narva, a modern inventory and POS platform for growing businesses. Designed as a flexible SaaS product with an on-premise deployment option for teams that need tighter control over their data and infrastructure."
-    },
-    {
       role: "Freelance Developer",
       company: "Independent",
       period: "May 2023 - Present",
