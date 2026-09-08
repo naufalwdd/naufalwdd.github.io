@@ -1,68 +1,14 @@
 import { motion } from 'framer-motion';
+import { ArrowUpRight, BriefcaseBusiness } from 'lucide-react';
 import { cvData } from '../data/cv';
 
 export default function Experience() {
-    return (
-        <section id="experience" className="section bg-white">
-            <div className="container max-w-4xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <h2 className="section-title">Professional Experience</h2>
-                    <p className="text-center text-slate-600 text-lg mb-12 max-w-2xl mx-auto">
-                        My professional journey building impactful software solutions
-                    </p>
-                </motion.div>
-
-                {/* Timeline Layout */}
-                <div className="relative">
-                    {/* Animated gradient line */}
-                    <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent/20 via-accent/40 to-accent/20" />
-
-                    <div className="space-y-12">
-                        {cvData.experience.map((job, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, x: -30 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true, margin: "-50px" }}
-                                transition={{ delay: index * 0.2, type: "spring", stiffness: 50 }}
-                                className="relative pl-20 group"
-                            >
-                                {/* Enhanced timeline dot */}
-                                <motion.div
-                                    initial={{ scale: 0 }}
-                                    whileInView={{ scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: (index * 0.2) + 0.2, type: "spring" }}
-                                    className="absolute left-6 top-6 w-5 h-5 rounded-full bg-gradient-to-br from-accent to-accent-light shadow-glow flex items-center justify-center group-hover:scale-125 transition-transform duration-300"
-                                >
-                                    <div className="w-2 h-2 bg-white rounded-full" />
-                                </motion.div>
-
-                                {/* Card */}
-                                <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-soft hover:shadow-medium transition-all duration-300 hover:-translate-y-1">
-                                    <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-3 gap-2">
-                                        <h3 className="text-xl font-bold text-slate-900">{job.role}</h3>
-                                        <span className="inline-flex items-center px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-semibold">
-                                            {job.period}
-                                        </span>
-                                    </div>
-
-                                    <p className="text-lg font-semibold text-accent mb-4">{job.company}</p>
-
-                                    <p className="text-slate-600 leading-relaxed text-sm">
-                                        {job.summary}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+  return <section id="experience" className="section border-t border-white/[0.06] bg-[#0b0e11]">
+    <div className="section-shell grid gap-14 lg:grid-cols-[.7fr_1.3fr]">
+      <div><p className="eyebrow mb-4">01 / experience</p><h2 className="section-title max-w-sm">A track record of shipping with care.</h2><p className="mt-6 max-w-sm text-sm leading-7 text-white/50">From retail operations to manufacturing workflows, I partner with teams to make software dependable, understandable, and ready for real-world use.</p><a href="#contact" className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-lime hover:gap-3 transition-all">Discuss a project <ArrowUpRight size={16} /></a><div className="glass-soft mt-12 rounded-2xl p-5"><p className="font-mono text-[10px] uppercase tracking-[.18em] text-white/35">Education</p><p className="mt-3 text-sm font-bold text-white/80">{cvData.education[0].degree}</p><p className="mt-1 text-xs text-white/45">{cvData.education[0].institution} · {cvData.education[0].period}</p></div></div>
+      <div className="space-y-4">
+        {cvData.experience.map((job, index) => <motion.article key={job.company} initial={{ opacity: 0, x: 18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * .1 }} className="glass group rounded-2xl p-5 transition hover:border-lime/30 md:p-6"><div className="flex gap-4"><div className="mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-lime/10 text-lime"><BriefcaseBusiness size={18} /></div><div className="min-w-0 flex-1"><div className="flex flex-col justify-between gap-2 sm:flex-row"><div><h3 className="text-base font-extrabold text-white md:text-lg">{job.role}</h3><p className="mt-1 text-sm font-semibold text-lime/80">{job.company}</p></div><span className="font-mono text-[10px] uppercase tracking-wider text-white/35">{job.period}</span></div><p className="mt-4 text-sm leading-7 text-white/52">{job.summary}</p></div></div></motion.article>)}
+      </div>
+    </div>
+  </section>;
 }

@@ -11,6 +11,12 @@ export const cvData = {
   },
   experience: [
     {
+      role: "Product Engineer & Creator",
+      company: "Narva",
+      period: "Ongoing",
+      summary: "Building Narva, a modern inventory and POS platform for growing businesses. Designed as a flexible SaaS product with an on-premise deployment option for teams that need tighter control over their data and infrastructure."
+    },
+    {
       role: "Freelance Developer",
       company: "Independent",
       period: "May 2023 - Present",
@@ -59,7 +65,7 @@ export const cvData = {
     ],
     mobile: ["React Native", "Xamarin"],
     databases: ["PostgreSQL", "SQL Server", "SQLite", "FirebirdSQL"],
-    tools: ["Git", "GitHub", "Gitlab", "Postman", "HTTPie", "Docker", "Antigravity", "Windsurf", "VS Code"],
+    tools: ["Git", "GitHub", "Gitlab", "Postman", "HTTPie", "Docker", "VS Code"],
     softSkills: [
       "Problem-solving",
       "Adaptability",

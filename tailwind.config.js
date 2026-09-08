@@ -7,17 +7,19 @@ export default {
     theme: {
         extend: {
             colors: {
-                bg: '#f8fafc',
-                surface: '#ffffff',
+                ink: '#080a0d',
+                surface: '#101419',
+                lime: '#c8ff5a',
+                cyan: '#77e6e0',
                 accent: {
-                    DEFAULT: '#0d9488',
-                    light: '#14b8a6',
-                    dark: '#0f766e',
+                    DEFAULT: '#c8ff5a',
+                    light: '#d9ff78',
+                    dark: '#86b52d',
                 },
             },
             fontFamily: {
-                sans: ['Inter', 'system-ui', 'sans-serif'],
-                mono: ['JetBrains Mono', 'monospace'],
+                sans: ['Manrope', 'system-ui', 'sans-serif'],
+                mono: ['DM Mono', 'monospace'],
             },
             boxShadow: {
                 'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',

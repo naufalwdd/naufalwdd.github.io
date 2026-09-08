@@ -1,33 +1,7 @@
+import { ArrowUpRight, AtSign, Github, Linkedin, MessageCircle } from 'lucide-react';
 import { cvData } from '../data/cv';
-import { Heart } from 'lucide-react';
 
 export default function Footer() {
-    return (
-        <footer className="py-12 bg-gradient-to-b from-slate-50 to-white border-t border-slate-200">
-            <div className="container max-w-4xl mx-auto px-6">
-                <div className="flex flex-col items-center gap-6">
-                    {/* Logo */}
-                    <div className="text-2xl font-bold font-mono text-slate-900">
-                        Naufal<span className="gradient-text">.dev</span>
-                    </div>
-
-                    {/* Copyright */}
-                    <p className="text-slate-600 text-sm text-center flex items-center gap-2">
-                        © {new Date().getFullYear()} {cvData.personalInfo.name}.
-                        <span className="flex items-center gap-1">
-                            Built with <Heart size={14} className="text-red-500 fill-red-500" /> using React & Tailwind CSS
-                        </span>
-                    </p>
-
-                    {/* Tech Stack */}
-                    <div className="flex flex-wrap justify-center gap-2 text-xs text-slate-400">
-                        <span className="px-3 py-1 bg-slate-100 rounded-full">React</span>
-                        <span className="px-3 py-1 bg-slate-100 rounded-full">TypeScript</span>
-                        <span className="px-3 py-1 bg-slate-100 rounded-full">Tailwind CSS</span>
-                        <span className="px-3 py-1 bg-slate-100 rounded-full">Framer Motion</span>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    );
+  const whatsappNumber = cvData.personalInfo.phone.replace(/\D/g, '');
+  return <footer className="border-t border-white/[0.06] bg-[#080a0d] px-6 py-8"><div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 text-xs text-white/35 md:flex-row"><span className="font-mono">© {new Date().getFullYear()} {cvData.personalInfo.name}</span><span className="font-mono uppercase tracking-[.16em]">Designed & built with intention</span><div className="flex items-center gap-4"><a href={`https://${cvData.personalInfo.linkedin}`} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="transition hover:text-lime"><Linkedin size={16} /></a><a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="transition hover:text-lime"><MessageCircle size={16} /></a><a href="https://www.threads.com/@naufalwdd" target="_blank" rel="noreferrer" aria-label="Threads" className="transition hover:text-lime"><AtSign size={16} /></a><a href="https://github.com/naufalwdd" target="_blank" rel="noreferrer" aria-label="GitHub" className="transition hover:text-lime"><Github size={16} /></a><a href="#about" className="inline-flex items-center gap-1 font-bold text-lime">Back to top <ArrowUpRight size={14} /></a></div></div></footer>;
 }
